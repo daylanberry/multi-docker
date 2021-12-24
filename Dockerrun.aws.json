@@ -1,0 +1,35 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinations": [
+    {
+      "name": "client",
+      "image": "daylanberry/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "api",
+      "image": "daylanberry/multi-server",
+      "hostname": "server",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "daylanberry/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "daylanberry/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
